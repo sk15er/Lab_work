@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Seventeen Lab · Learn to Code</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--ink:#172033;--mut:#697586;--line:#e4e8ef;--acc:#167d75;--acc-soft:#e8f6f3;--ok:#16834a;--bad:#c0393b;--editor:#111827;--editor-ink:#edf2f7;box-sizing:border-box}
+:root[data-theme="dark"]{--bg:#0d1421;--card:#141e2e;--ink:#eef3fa;--mut:#9eacc0;--line:#28364b;--acc:#5bd6c6;--acc-soft:#142e32;--ok:#54d88b;--bad:#ff8585;--editor:#080d16;--editor-ink:#edf2f7}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:100px}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+button,textarea{font:inherit}button{color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 13px;min-height:44px;cursor:pointer}button:active{transform:scale(.98)}button:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.top{position:sticky;top:0;z-index:10;background:var(--bg);padding-top:env(safe-area-inset-top);border-bottom:1px solid var(--line)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;max-width:1000px;margin:auto}.logo{font-size:18px;font-weight:800;letter-spacing:-.04em}.logo i{color:var(--acc);font-style:normal}.row button{font-size:13px;min-height:38px;padding:6px 10px}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:0 14px 10px;scrollbar-width:none;max-width:1000px;margin:auto}.chips::-webkit-scrollbar{display:none}.chip{flex:none;width:38px;min-height:38px;padding:0;border-radius:11px;font-weight:700;font-size:13px}.chip.on{background:var(--acc);border-color:var(--acc);color:white}.chip.done:after{content:"✓";position:absolute;font-size:9px;top:0;right:3px;color:var(--ok)}.chip{position:relative}
+main{max-width:1000px;margin:auto;padding:18px 12px 20px}.eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);font-weight:800}h1{font-size:28px;line-height:1.13;letter-spacing:-.045em;margin:5px 0 7px}.aim{color:var(--mut);margin:0 0 16px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:12px}.learn{padding:14px;display:grid;gap:12px}.learn b{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:3px}.try{background:var(--acc-soft);border-radius:12px;padding:10px 12px}.try b{color:var(--acc)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px;border-bottom:1px solid var(--line);flex-wrap:wrap}.seg{display:flex;gap:3px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:3px}.seg button{border:0;background:transparent;min-height:34px;padding:4px 13px;border-radius:8px;color:var(--mut);font-weight:700}.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 4px #00000012}.tools{display:flex;gap:5px}.tools button{min-height:34px;padding:4px 9px;font-size:12px;color:var(--mut)}
+textarea{display:block;width:100%;border:0;outline:0;resize:vertical;background:var(--editor);color:var(--editor-ink);font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:14px;tab-size:4;white-space:pre;overflow:auto;border-radius:0}#ed{height:300px;min-height:220px}#si{height:78px;font-size:14px;border-top:1px solid var(--line)}
+.lbl{padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);display:flex;justify-content:space-between;gap:8px}.lbl span:last-child{letter-spacing:0;text-transform:none}
+pre{margin:0;padding:13px;min-height:64px;max-height:220px;overflow:auto;background:var(--editor);color:var(--editor-ink);font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}.bad{color:var(--bad)}.ok{color:var(--ok)}
+.note{color:var(--mut);font-size:11px;padding:0 2px;margin-top:-3px}
+.explain-toggle{display:flex;width:100%;align-items:center;justify-content:space-between;text-align:left;font-weight:750;background:var(--card);padding:13px 14px}.explain-toggle span:last-child{color:var(--acc)}.explain-body{padding:14px;border-top:1px solid var(--line)}.step-top{display:flex;align-items:center;justify-content:space-between;color:var(--mut);font-size:11px;font-weight:700;margin-bottom:8px}.step-text{font-size:14px;min-height:44px}.step-code{display:inline-block;background:var(--bg);border:1px solid var(--line);padding:3px 7px;border-radius:7px;font:12px ui-monospace,monospace;margin-bottom:8px}.step-actions{display:flex;justify-content:space-between;gap:8px;margin-top:12px}.step-actions button{min-height:38px;padding:6px 12px;font-size:13px}.step-actions .primary{background:var(--acc);border-color:var(--acc);color:#fff}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--bg);border-top:1px solid var(--line);padding:9px 12px calc(9px + env(safe-area-inset-bottom))}.dock div{display:flex;gap:8px;max-width:1000px;margin:auto}.run{flex:1;background:var(--acc);border-color:var(--acc);color:white;font-weight:800;font-size:15px}.dock .nav{width:44px;padding:0;font-size:18px}
+@media(min-width:760px){body{padding-bottom:88px}main{padding:28px 20px}.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:14px;align-items:start}.left-col,.right-col{min-width:0}h1{font-size:36px}#ed{height:420px}.chips{padding-left:20px;padding-right:20px}.row{padding-left:20px;padding-right:20px}}
+@media(max-width:360px){h1{font-size:25px}.tools{gap:3px}.tools button{padding:3px 7px;font-size:11px}.seg button{padding:4px 10px}}
+</style></head><body>
+<div class="top"><div class="row"><div class="logo">Seventeen <i>·</i> Lab</div><button id="th" aria-label="Toggle theme">🌙 Dark</button></div><div class="chips" id="chips"></div></div>
+<main>
+<div class="eyebrow" id="eb"></div><h1 id="ti"></h1><p class="aim" id="aim"></p>
+<div class="card learn"><div><b>The idea</b><span id="idea"></span></div><div class="try"><b>Your challenge</b><span id="ch"></span></div></div>
+<div class="cols"><div class="right-col">
+<div class="card"><div class="bar"><div class="seg" id="seg"></div><div class="tools"><button id="blank">Blank</button><button id="rs">Reset</button><button id="cp">Copy</button></div></div>
+<textarea id="ed" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Code editor"></textarea></div>
+<div class="note">Your code saves automatically on this device.</div>
+</div><div class="left-col">
+<div class="card"><div class="lbl"><span>Input</span><span>values your program reads</span></div><textarea id="si" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Program input"></textarea></div>
+<div class="card"><div class="lbl"><span>Output</span><span id="st"></span></div><pre id="out">Run your code to see the result.</pre></div>
+<div class="card" id="explain-card"><button class="explain-toggle" id="explain-toggle" aria-expanded="false"><span>Explain this code</span><span id="explain-arrow">＋</span></button><div id="explain-body" class="explain-body" hidden><div class="step-top"><span id="step-count">STEP 1</span><span>Plain, simple language</span></div><div class="step-code" id="step-code"></div><div class="step-text" id="step-text"></div><div class="step-actions"><button id="step-prev" disabled>← Back</button><button id="step-next" class="primary">Next →</button></div></div></div>
+</div></div>
+</main>
+<div class="dock"><div><button class="nav" id="pv" aria-label="Previous">←</button><button class="run" id="run">▶ Run program</button><button class="nav" id="nx" aria-label="Next">→</button></div></div>
+<script>
+const D=[["Print HELLO","Print the word HELLO.","Every C++ program starts at main(). cout prints to the screen; endl moves to a new line.","","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    cout << \"HELLO\" << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    cout << \"HELLO\" << endl;\n    return 0;\n}","Print your own name instead."],["Add two numbers","Read two numbers and print their sum.","Declare two variables, read them with cin, then print a + b.","12\n30","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << \"Sum = \" << a + b << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << \"Sum = \" << a + b << endl;\n    return 0;\n}","Also print the difference and the product."],["Simple interest","SI = P × R × T / 100.","Formula: SI = P × R × T / 100. setprecision(2) keeps two decimals.","1000\n5\n2","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    float p, r, t;\n    cin >> p >> r >> t;\n    cout << fixed << setprecision(2);\n    cout << \"Simple Interest = \" << p * r * t / 100 << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    float p, r, t;\n    cin >> p >> r >> t;\n    cout << fixed << setprecision(2);\n    cout << \"Simple Interest = \" << p * r * t / 100 << endl;\n    return 0;\n}","Print the total amount (P + SI) as well."],["Absolute value","Print |n| for any integer n.","If a number is negative, flip its sign.","-25","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    if (n < 0) n = -n;\n    cout << \"Absolute value = \" << n << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    if (n < 0) n = -n;\n    cout << \"Absolute value = \" << n << endl;\n    return 0;\n}","Rewrite it using the ternary operator ?:"],["Swap two numbers","Exchange the values of a and b using a temp variable.","Like swapping two glasses of juice: you need a third empty glass (t).","5\n9","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int a, b, t;\n    cin >> a >> b;\n    t = a; a = b; b = t;\n    cout << \"a = \" << a << \", b = \" << b << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int a, b, t;\n    cin >> a >> b;\n    t = a; a = b; b = t;\n    cout << \"a = \" << a << \", b = \" << b << endl;\n    return 0;\n}","Swap without a third variable (a = a + b …)."],["Gross salary","Gross = Basic + DA(40%) + HRA(20%).","Gross = basic + DA (40% of basic) + HRA (20% of basic).","20000","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    float basic;\n    cin >> basic;\n    float da = 0.40 * basic, hra = 0.20 * basic;\n    cout << fixed << setprecision(2);\n    cout << \"Gross salary = \" << basic + da + hra << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    float basic;\n    cin >> basic;\n    float da = 0.40 * basic, hra = 0.20 * basic;\n    cout << fixed << setprecision(2);\n    cout << \"Gross salary = \" << basic + da + hra << endl;\n    return 0;\n}","Change DA to 50% when basic is above 30000."],["Even or odd","Use the remainder operator %.","n % 2 is the remainder after dividing by 2. Remainder 0 means even.","7","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    if (n % 2 == 0) cout << \"Even\" << endl;\n    else cout << \"Odd\" << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    if (n % 2 == 0) cout << \"Even\" << endl;\n    else cout << \"Odd\" << endl;\n    return 0;\n}","Check whether the number is divisible by 5 too."],["Greatest of three","Compare three numbers.","Assume a is the biggest, then let b and c challenge it.","14\n52\n33","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n    int g = a;\n    if (b > g) g = b;\n    if (c > g) g = c;\n    cout << \"Greatest = \" << g << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n    int g = a;\n    if (b > g) g = b;\n    if (c > g) g = c;\n    cout << \"Greatest = \" << g << endl;\n    return 0;\n}","Find the smallest of the three as well."],["Grade of a student","90+ A, 75+ B, 60+ C, 40+ D, else F.","An if / else-if ladder checks conditions from top to bottom and stops at the first true one.","82","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int m;\n    cin >> m;\n    if (m >= 90) cout << \"Grade A\" << endl;\n    else if (m >= 75) cout << \"Grade B\" << endl;\n    else if (m >= 60) cout << \"Grade C\" << endl;\n    else if (m >= 40) cout << \"Grade D\" << endl;\n    else cout << \"Grade F\" << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int m;\n    cin >> m;\n    if (m >= 90) cout << \"Grade A\" << endl;\n    else if (m >= 75) cout << \"Grade B\" << endl;\n    else if (m >= 60) cout << \"Grade C\" << endl;\n    else if (m >= 40) cout << \"Grade D\" << endl;\n    else cout << \"Grade F\" << endl;\n    return 0;\n}","Add a grade A+ for 95 and above."],["Divisors & factorial","Print the divisors of n and n!.","i divides n when n % i == 0. Factorial multiplies 1 × 2 × … × n.","6","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n;\n    long f = 1;\n    cin >> n;\n    cout << \"Divisors:\";\n    for (int i = 1; i <= n; i++)\n        if (n % i == 0) cout << \" \" << i;\n    for (int i = 1; i <= n; i++) f = f * i;\n    cout << \"\\nFactorial = \" << f << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n;\n    long f = 1;\n    cin >> n;\n    cout << \"Divisors:\";\n    for (int i = 1; i <= n; i++)\n        if (n % i == 0) cout << \" \" << i;\n    for (int i = 1; i <= n; i++) f = f * i;\n    cout << \"\\nFactorial = \" << f << endl;\n    return 0;\n}","Count how many divisors there are (is n prime?)."],["Fibonacci series","Each term is the sum of the previous two.","Start with 0 and 1. Each next term is the sum of the previous two.","10","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n, a = 0, b = 1;\n    cin >> n;\n    for (int i = 0; i < n; i++) {\n        cout << a << \" \";\n        int c = a + b;\n        a = b;\n        b = c;\n    }\n    cout << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n, a = 0, b = 1;\n    cin >> n;\n    for (int i = 0; i < n; i++) {\n        cout << a << \" \";\n        int c = a + b;\n        a = b;\n        b = c;\n    }\n    cout << endl;\n    return 0;\n}","Print the sum of the first n terms."],["First ten natural numbers","Loop from 1 to 10.","A for loop has three parts: start, condition, step.","","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    for (int i = 1; i <= 10; i++)\n        cout << i << \" \";\n    cout << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    for (int i = 1; i <= 10; i++)\n        cout << i << \" \";\n    cout << endl;\n    return 0;\n}","Print them in reverse (10 down to 1)."],["Reverse of a number","Peel digits using % 10 and / 10.","n % 10 gives the last digit. n / 10 removes it. Build the reverse digit by digit.","12345","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n, r = 0;\n    cin >> n;\n    while (n > 0) {\n        r = r * 10 + n % 10;\n        n = n / 10;\n    }\n    cout << \"Reverse = \" << r << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n, r = 0;\n    cin >> n;\n    while (n > 0) {\n        r = r * 10 + n % 10;\n        n = n / 10;\n    }\n    cout << \"Reverse = \" << r << endl;\n    return 0;\n}","Check whether a number is a palindrome."],["Multiplication table","Print n × 1 … n × 10.","A loop runs the same line for i = 1 to 10.","7","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    for (int i = 1; i <= 10; i++)\n        cout << n << \" x \" << i << \" = \" << n * i << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    for (int i = 1; i <= 10; i++)\n        cout << n << \" x \" << i << \" = \" << n * i << endl;\n    return 0;\n}","Print the table up to a limit typed by the user."],["Grades for a list of students","Read marks of n students, print each grade.","Put the grade ladder inside a loop to handle many students.","4\n95\n78\n55\n30","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n;\n    for (int i = 1; i <= n; i++) {\n        cin >> m;\n        cout << \"Student \" << i << \": \";\n        if (m >= 90) cout << \"A\" << endl;\n    else if (m >= 75) cout << \"B\" << endl;\n    else if (m >= 60) cout << \"C\" << endl;\n    else if (m >= 40) cout << \"D\" << endl;\n    else cout << \"F\" << endl;\n    }\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n;\n    for (int i = 1; i <= n; i++) {\n        cin >> m;\n        cout << \"Student \" << i << \": \";\n        if (m >= 90) cout << \"A\" << endl;\n    else if (m >= 75) cout << \"B\" << endl;\n    else if (m >= 60) cout << \"C\" << endl;\n    else if (m >= 40) cout << \"D\" << endl;\n    else cout << \"F\" << endl;\n    }\n    return 0;\n}","Also print the class average."],["Function power(a, b)","Compute a^b with a user-defined function.","A function packs reusable work. power() multiplies a by itself b times.","2\n10","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nlong power(int a, int b) {\n    long result = 1;\n    for (int i = 0; i < b; i++)\n        result = result * a;\n    return result;\n}\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << a << \"^\" << b << \" = \" << power(a, b) << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nlong power(int a, int b) {\n    long result = 1;\n    for (int i = 0; i < b; i++)\n        result = result * a;\n    return result;\n}\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << a << \"^\" << b << \" = \" << power(a, b) << endl;\n    return 0;\n}","Handle b = 0 and add a second function square()."],["1-D array in reverse","Store 10 numbers, print them backwards.","An array stores many values; indexes run 0 to 9. Loop backwards from 9 to 0.","1\n2\n3\n4\n5\n6\n7\n8\n9\n10","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int a[10];\n    for (int i = 0; i < 10; i++)\n        cin >> a[i];\n    for (int i = 9; i >= 0; i--)\n        cout << a[i] << \" \";\n    cout << endl;\n    return 0;\n}","#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int a[10];\n    for (int i = 0; i < 10; i++)\n        cin >> a[i];\n    for (int i = 9; i >= 0; i--)\n        cout << a[i] << \" \";\n    cout << endl;\n    return 0;\n}","Print the largest element of the array."]]; // [title, aim, idea, stdin, C, C++, challenge]
+const $=i=>document.getElementById(i);let idx=0,lang=0,explainOpen=false,stepIndex=0;
+const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const done=()=>{try{return JSON.parse(S.get("done")||"{}")}catch(e){return{}}};
+const key=()=>"c"+idx+"_"+lang;
+function toC(code){
+ let x=code.replace(/#include\s*<iostream>\s*/g,'').replace(/#include\s*<iomanip>\s*/g,'').replace(/using\s+namespace\s+std\s*;\s*/g,'').replace(/int main\s*\(\s*\)/g,'int main(void)').replace(/long power/g,'long power');
+ x=x.replace(/cout\s*<<\s*fixed\s*<<\s*setprecision\s*\(\s*2\s*\)\s*;/g,'');
+ x=x.replace(/cin\s*>>\s*([^;]+);/g,(m,v)=>{let names=v.split(/\s*>>\s*/).map(z=>z.trim());return 'scanf("'+names.map(n=>/^(p|r|t|basic|da|hra)$/.test(n)?'%f':'%d').join(' ')+'", '+names.map(n=>'&'+n).join(', ')+');'});
+ x=x.replace(/cout\s*<<\s*([^;]+);/g,(m,body)=>{
+   let parts=body.split(/\s*<<\s*/),fmt='',args=[];
+   for(let part of parts){
+     part=part.trim();
+     if(part==='endl'){fmt+='\\n';continue}
+     if(/^".*"$/.test(part)){fmt+=part.slice(1,-1).replace(/\\n/g,'\\n');continue}
+     if(part==='fixed'||/^setprecision/.test(part))continue;
+     let type=/^(p|r|t|basic|da|hra)$/.test(part)||/p\s*\*\s*r|basic\s*\+/.test(part)?'%.2f':/power\s*\(/.test(part)?'%ld':'%d';
+     if(/^\d+\.\d+$/.test(part)){fmt+=type;args.push(part)}
+     else {fmt+=type;args.push(part)}
+   }
+   return 'printf("'+fmt+'", '+args.join(', ')+');';
+ });
+ x=x.replace(/printf\("([^"]*)",\s*\);/g,'printf("$1");');
+ return '#include <stdio.h>\n'+x;
+}
+function toCpp(code){return code;}
+const BL=[`#include <stdio.h>\n\nint main(void) {\n    \n    return 0;\n}`,`#include <iostream>\nusing namespace std;\n\nint main() {\n    \n    return 0;\n}`];
+function orig(){const p=D[idx];return S.get(key())??(lang===0?toC(p[5]||p[4]):p[5]||p[4]);}
+function render(){
+ const p=D[idx],d=done();
+ $("chips").innerHTML=D.map((_,i)=>`<button class="chip ${i===idx?"on":""} ${d[i]?"done":""}" onclick="go(${i})" aria-label="Lesson ${i+1}">${i+1}</button>`).join("");
+ $("eb").textContent="LESSON "+String(idx+1).padStart(2,"0")+" / "+D.length;$("ti").textContent=p[0];$("aim").textContent=p[1];
+ $("idea").textContent=p[2];$("ch").textContent=p[6];
+ $("seg").innerHTML=["C","C++"].map((n,i)=>`<button class="${i===lang?"on":""}" onclick="setLang(${i})" aria-pressed="${i===lang}">${n}</button>`).join("");
+ $("ed").value=orig();$("si").value=p[3]||"";
+ $("out").textContent="Run your code to see the result.";$("out").className="";$("st").textContent="";
+ explainOpen=false;stepIndex=0;$("explain-body").hidden=true;$("explain-toggle").setAttribute("aria-expanded","false");$("explain-arrow").textContent="＋";
+ const c=document.querySelector(".chip.on");c&&c.scrollIntoView({inline:"center",block:"nearest"});
+}
+function setLang(n){lang=n;render()}
+function go(i){idx=Math.max(0,Math.min(D.length-1,i));render();window.scrollTo({top:0,behavior:"smooth"})}
+$("pv").onclick=()=>go(idx-1);$("nx").onclick=()=>go(idx+1);
+$("ed").addEventListener("input",()=>S.set(key(),$("ed").value));
+$("rs").onclick=()=>{try{localStorage.removeItem(key())}catch(e){}$("ed").value=lang===0?toC(D[idx][5]||D[idx][4]):(D[idx][5]||D[idx][4]);S.set(key(),$("ed").value)};
+$("blank").onclick=()=>{$("ed").value=BL[lang];S.set(key(),$("ed").value);$("ed").focus()};
+$("cp").onclick=async()=>{try{await navigator.clipboard.writeText($("ed").value);$("cp").textContent="Copied ✓";setTimeout(()=>$("cp").textContent="Copy",1300)}catch(e){$("cp").textContent="Select code to copy";setTimeout(()=>$("cp").textContent="Copy",1500)}};
+$("ed").addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const t=e.currentTarget,s=t.selectionStart,end=t.selectionEnd;t.setRangeText("    ",s,end,"end");S.set(key(),t.value)}});
+document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();run()}});
+function theme(t){document.documentElement.dataset.theme=t;$("th").textContent=t==="dark"?"☀ Light":"☾ Dark";S.set("theme",t)}
+$("th").onclick=()=>theme(document.documentElement.dataset.theme==="dark"?"light":"dark");theme(S.get("theme")==="dark"?"dark":"light");
+function show(t,c){$("out").className=c||"";$("out").textContent=t}
+$("run").onclick=run;
+async function run(){
+ const code=$("ed").value,inp=$("si").value,t0=performance.now();
+ $("run").disabled=true;$("run").textContent="Running…";$("st").textContent="Compiling";
+ try{
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),20000);
+  let data;
+  try{
+   const listResponse=await fetch("https://wandbox.org/api/list.json",{signal:controller.signal});
+   if(!listResponse.ok)throw new Error("Could not load compiler choices.");
+   const compilers=await listResponse.json(),language=lang===0?"C":"C++";
+   const choices=compilers.filter(c=>c.language===language&&/^gcc/.test(c.name));
+   if(!choices.length)throw new Error("No "+language+" compiler is available right now.");
+   const compiler=choices.find(c=>!c.name.includes("head"))||choices[0];
+   const response=await fetch("https://wandbox.org/api/compile.json",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({compiler:compiler.name,code:code,stdin:inp,save:false,options:"warning"}),signal:controller.signal});
+   if(!response.ok)throw new Error("Compiler service returned "+response.status+". Please try again.");
+   data=await response.json();
+  }finally{clearTimeout(timeout)}
+  const compileText=[data.compiler_error,data.compiler_output,data.compiler_message].filter(Boolean).join("\\n").trim();
+  const status=String(data.status??"0");
+  if(status!=="0"&&compileText){show(compileText,"bad");$("st").textContent="Compile error";return}
+  const stdout=data.program_output||"",stderr=data.program_error||"";
+  if(stderr){show((stdout?stdout+"\\n":"")+stderr,"bad");$("st").textContent="Program error";return}
+  if(status!=="0"){show(compileText||"The program could not be compiled. Check the code and try again.","bad");$("st").textContent="Compile error";return}
+  show(stdout||"(Your program ran but printed nothing.)", "ok");
+  $("st").textContent="✓ "+Math.round(performance.now()-t0)+" ms";
+  const d=done();d[idx]=1;S.set("done",JSON.stringify(d));document.querySelectorAll(".chip")[idx].classList.add("done");
+ }catch(e){
+  const msg=e.name==="AbortError"?"The compiler took too long. Try again.":e instanceof TypeError?"Could not reach the online compiler. Check your internet connection and try again.":e.message||"Something went wrong.";
+  show(msg,"bad");$("st").textContent="Could not run";
+ }finally{$("run").disabled=false;$("run").textContent="▶ Run program"}
+}
+function explainSteps(){
+ const code=$("ed").value.split("\n"),steps=[];
+ code.forEach((raw,i)=>{const line=raw.trim();if(!line||line.startsWith("#include")||line.startsWith("using namespace")||line==="{"||line==="}"||line==="};")return;
+ let why="";
+ if(/int main|main\(void\)/.test(line))why="This is where the program starts.";
+ else if(/return 0/.test(line))why="This tells the system the program finished successfully.";
+ else if(/scanf|cin\s*>>/.test(line))why="This takes a value typed by the user and stores it in a variable.";
+ else if(/printf|cout\s*<</.test(line))why="This shows text or a result on the screen.";
+ else if(/if\s*\(/.test(line))why="This checks a condition. The code inside runs only when it is true.";
+ else if(/else if|else\b/.test(line))why="This is the alternative path when the earlier condition doesn't match.";
+ else if(/\bfor\s*\(/.test(line))why="This repeats the code in a loop.";
+ else if(/\bwhile\s*\(/.test(line))why="This keeps repeating while the condition is true.";
+ else if(/=\s*[^=]/.test(line)&&/;\s*$/.test(line))why="This stores a value in a variable or updates one.";
+ else if(/^\w[\w\s*]+\s+\w+\s*\(/.test(line))why="This defines a reusable function.";
+ else if(/^\w/.test(line))why="This line does part of the program's work.";
+ if(why)steps.push({code:line,text:why});
+ });
+ if(!steps.length)steps.push({code:"Your code",text:"Add a few lines of code, then open this guide again."});
+ return steps;
+}
+function drawExplain(){
+ const steps=explainSteps();stepIndex=Math.max(0,Math.min(stepIndex,steps.length-1));const s=steps[stepIndex];
+ $("step-count").textContent="STEP "+(stepIndex+1)+" OF "+steps.length;$("step-code").textContent=s.code;$("step-text").textContent=s.text;
+ $("step-prev").disabled=stepIndex===0;$("step-next").disabled=stepIndex===steps.length-1;$("step-next").textContent=stepIndex===steps.length-1?"That's it ✓":"Next →";
+}
+$("explain-toggle").onclick=()=>{explainOpen=!explainOpen;$("explain-body").hidden=!explainOpen;$("explain-toggle").setAttribute("aria-expanded",String(explainOpen));$("explain-arrow").textContent=explainOpen?"−":"＋";if(explainOpen)drawExplain()};
+$("step-prev").onclick=()=>{stepIndex--;drawExplain()};$("step-next").onclick=()=>{if(stepIndex<explainSteps().length-1)stepIndex++;drawExplain()};
+render();
+</script></body></html>
