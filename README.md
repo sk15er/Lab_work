@@ -1,8 +1,10 @@
 # Lab work 
 > Bsc Mathmatics and Computing Course for lab work of codes. By Sk16er or Shushank
+
+# [Click here to download the ZIP](https://github.com/sk15er/Lab_work/blob/main/Create_FOP_C_Programs_OneClick.ps1) 
  
 ## Updates 
-- Currently we have 10 programs of FOP and we have python script along with the ps1 script to create all the programs just download this [script]() and run or if not then download this [Zip]()
+- Currently we have 10 programs of FOP and we have python script along with the ps1 script to create all the programs just download this [script](https://github.com/sk15er/Lab_work/blob/main/Create_FOP_C_Programs_OneClick.ps1) and run or if not then download this [Zip](https://github.com/sk15er/Lab_work/releases/download/zip/FOP_First_10_C_Programs.zip)
 - The programs are avaiable in both `C` and `CPP` 
 
 
