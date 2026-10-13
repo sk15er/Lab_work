@@ -307,7 +307,7 @@ async function runCode() {
     });
     let runtimeError = result.error || "";
     if (/macros\.texi|symbolic package|\bsyms\b/i.test(`${runtimeError}\n${runStderr}`)) {
-      runtimeError = `This program needs symbolic algebra, which is not included in the static browser runtime. The graph and source remain available; use Open Octave Online for symbolic execution.\n\n${runtimeError}`;
+      runtimeError = `This edited program uses symbolic features that are not included in the static browser runtime. Use Open Octave Online for symbolic execution.\n\n${runtimeError}`;
     }
     const output = [runOutput.trim(), runStderr.trim(), runtimeError].filter(Boolean).join("\n").trim();
     if (result.status !== 0 || result.error) {

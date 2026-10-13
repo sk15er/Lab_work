@@ -2,15 +2,13 @@
 > Bsc Mathmatics and Computing Course for lab work of codes. By Sk16er or Shushank
 
 # [WEBSITE TO LEARN](https://sk15er.github.io/Lab_work/)
-# [Click here to download the ZIP Codes](https://github.com/sk15er/Lab_work/releases/download/zip/FOP_First_10_C_Programs.zip) 
+# Zip files of codes [MATLAB](https://github.com/sk15er/Lab_work/releases/download/files/Matlab_programs.zip) and [FOP](https://github.com/sk15er/Lab_work/releases/download/files/fop_programs.zip)
  
-## Updates 
-- Currently we have 10 programs of FOP and we have python script along with the ps1 script to create all the programs just download this [script](https://github.com/sk15er/Lab_work/blob/main/Create_FOP_C_Programs_OneClick.ps1) and run or if not then download this [Zip](https://github.com/sk15er/Lab_work/releases/download/zip/FOP_First_10_C_Programs.zip)
-- The programs are avaiable in both `C` and `CPP` 
-
-
 ## Semister one 
+![alt text](image.png)
 
+## Updates 
+- Everything is done added matlab also here are few bugs will fix them.. latter as i get time.. gave me update if you find any bug or anything 
 
 ### Lab A: Fundamentals of Programming Lab (OSU-107-V)
 Languages for every program: **C, C++, Python**.
