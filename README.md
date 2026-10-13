@@ -48,9 +48,9 @@ Where a point has several functions or cases (for example item 2 lists nine func
 
 
 ### future TODO
-- Add the matlab also 
-- create a functional website
-- If you find any bugs or anything just hit a issue or pull request. 
+- Add the matlab also [x]
+- create a functional website [X]
+- If you find any bugs or anything just hit a issue or pull request. [X]
 
 `Thanks :)`
 

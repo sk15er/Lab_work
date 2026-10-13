@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MATLAB Lab · Seventeen Lab</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--ink:#172033;--mut:#697586;--line:#e4e8ef;--acc:#167d75;--acc-soft:#e8f6f3;--ok:#16834a;--bad:#c0393b;--editor:#111827;--editor-ink:#edf2f7;box-sizing:border-box}
+:root[data-theme="dark"]{--bg:#0d1421;--card:#141e2e;--ink:#eef3fa;--mut:#9eacc0;--line:#28364b;--acc:#5bd6c6;--acc-soft:#142e32;--ok:#54d88b;--bad:#ff8585;--editor:#080d16;--editor-ink:#edf2f7}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:110px}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+button,input,textarea{font:inherit}button,.action{color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 13px;min-height:44px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}button:active,.action:active{transform:scale(.98)}button:focus-visible,input:focus-visible,textarea:focus-visible,.action:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.top{position:sticky;top:0;z-index:10;background:var(--bg);padding-top:env(safe-area-inset-top);border-bottom:1px solid var(--line)}.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;max-width:1000px;margin:auto}.logo{font-size:18px;font-weight:800;letter-spacing:-.04em;white-space:nowrap}.logo i{color:var(--acc);font-style:normal}.row button{font-size:13px;min-height:38px;padding:6px 10px}
+.mode-row{justify-content:center;padding-top:0;padding-bottom:8px}.lab-nav{display:flex;gap:3px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:3px}.lab-nav a{min-width:76px;min-height:34px;padding:4px 13px;border-radius:8px;text-align:center;color:var(--mut);font-size:13px;font-weight:750;text-decoration:none}.lab-nav a.active{background:var(--acc);color:#fff}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:0 14px 10px;scrollbar-width:none;max-width:1000px;margin:auto}.chips::-webkit-scrollbar{display:none}.chip{flex:none;width:38px;min-height:38px;padding:0;border-radius:11px;font-weight:700;font-size:13px}.chip.on{background:var(--acc);border-color:var(--acc);color:white}
+main{max-width:1000px;margin:auto;padding:18px 12px 20px}.eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);font-weight:800}h1{font-size:28px;line-height:1.13;letter-spacing:-.045em;margin:5px 0 7px}.aim{color:var(--mut);margin:0 0 16px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:12px}.learn{padding:14px;display:grid;gap:12px}.learn b{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:3px}.try{background:var(--acc-soft);border-radius:12px;padding:10px 12px}.try b{color:var(--acc)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px;border-bottom:1px solid var(--line);flex-wrap:wrap}.tools{display:flex;gap:5px;flex-wrap:wrap}.tools button{min-height:34px;padding:4px 9px;font-size:12px;color:var(--mut)}
+textarea{display:block;width:100%;border:0;outline:0;resize:vertical;background:var(--editor);color:var(--editor-ink);font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:14px;tab-size:4;white-space:pre;overflow:auto;border-radius:0}#editor{height:300px;min-height:220px}
+.lbl{padding:8px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);display:flex;justify-content:space-between;gap:8px}.lbl span:last-child{letter-spacing:0;text-transform:none}pre{margin:0;padding:13px;min-height:64px;max-height:230px;overflow:auto;background:var(--editor);color:var(--editor-ink);font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}.bad{color:var(--bad)}.ok{color:var(--ok)}
+.note{color:var(--mut);font-size:11px;padding:0 2px;margin-top:-3px}.explain-toggle{display:flex;width:100%;align-items:center;justify-content:space-between;text-align:left;font-weight:750;background:var(--card);padding:13px 14px}.explain-toggle span:last-child{color:var(--acc)}.explain-body{padding:14px;border-top:1px solid var(--line)}.step-top{display:flex;align-items:center;justify-content:space-between;color:var(--mut);font-size:11px;font-weight:700;margin-bottom:8px}.step-text{font-size:14px;min-height:44px}.step-code{display:inline-block;background:var(--bg);border:1px solid var(--line);padding:3px 7px;border-radius:7px;font:12px ui-monospace,monospace;margin-bottom:8px}.step-actions{display:flex;justify-content:space-between;gap:8px;margin-top:12px}.step-actions button{min-height:38px;padding:6px 12px;font-size:13px}.step-actions .primary{background:var(--acc);border-color:var(--acc);color:#fff}
+.graph-wrap{padding:12px}.graph-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.graph-head strong{font-size:14px}.graph-head span{font-size:11px;color:var(--mut)}#graph{display:block;width:100%;height:220px;background:var(--bg);border:1px solid var(--line);border-radius:10px}.graph-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}.graph-actions button{min-height:36px;padding:5px 10px;font-size:12px}.params{display:flex;gap:10px;align-items:center;color:var(--mut);font-size:12px}.params label{display:flex;gap:5px;align-items:center}.params input{width:58px;min-height:34px;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.publish{padding:12px}.publish p{margin:0 0 10px;color:var(--mut);font-size:13px}.publish-row{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.publish-row label{display:grid;gap:4px;flex:1 1 170px;font-size:12px;color:var(--mut)}.publish-row input{width:100%;min-height:42px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}.publish-row button{background:var(--acc);border-color:var(--acc);color:white;font-weight:750}.publish-status{min-height:20px;margin-top:8px;font-size:12px;color:var(--mut)}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--bg);border-top:1px solid var(--line);padding:9px 12px calc(9px + env(safe-area-inset-bottom))}.dock div{display:flex;gap:8px;max-width:1000px;margin:auto}.run{flex:1;background:var(--acc);border-color:var(--acc);color:white;font-weight:800;font-size:15px}.dock .nav{width:44px;padding:0;font-size:18px}
+@media(min-width:760px){body{padding-bottom:88px}main{padding:28px 20px}.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:14px;align-items:start}.left-col,.right-col{min-width:0}h1{font-size:36px}#editor{height:420px}.chips{padding-left:20px;padding-right:20px}.row{padding-left:20px;padding-right:20px}}
+@media(max-width:360px){h1{font-size:25px}.tools{gap:3px}.tools button{padding:3px 7px;font-size:11px}.params{gap:5px}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="row"><div class="logo">Seventeen <i>·</i> Lab</div><button id="theme" aria-label="Toggle theme">☾ Dark</button></div>
+  <div class="row mode-row"><nav class="lab-nav" aria-label="Lab section"><a href="./index.html">FOP</a><a class="active" href="./matlab.html" aria-current="page">MATLAB</a></nav></div>
+  <div class="chips" id="programs" aria-label="MATLAB programs"></div>
+</div>
+<main>
+  <div class="eyebrow" id="eyebrow"></div><h1 id="title"></h1><p class="aim" id="aim"></p>
+  <div class="card learn"><div><b>The idea</b><span id="idea"></span></div><div class="try"><b>Focus</b><span id="focus"></span></div></div>
+  <div class="cols">
+    <div class="right-col">
+      <div class="card"><div class="bar"><div class="tools"><button id="reset">Reset</button><button id="copy">Copy</button></div><div class="tools"><a class="action" id="online" href="https://octave-online.net/" target="_blank" rel="noopener">Open Octave Online</a></div></div><textarea id="editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="MATLAB code editor"></textarea></div>
+      <div class="note">Edits save on this device. First run downloads about 20 MB of Octave; it is cached by your browser afterward.</div>
+    </div>
+    <div class="left-col">
+      <div class="card"><div class="lbl"><span>Output</span><span id="status"></span></div><pre id="output">Run your MATLAB code to see the result.</pre></div>
+      <div class="card" id="graph-card"><div class="lbl"><span>Graph</span><span id="graph-count"></span></div><div class="graph-wrap"><div class="graph-head"><strong id="graph-title"></strong><div class="params" id="params" hidden><label>a<input id="param-a" type="number" step="0.5" value="1"></label><label>b<input id="param-b" type="number" step="0.5" value="0"></label></div></div><canvas id="graph" role="img" aria-label="MATLAB example graph"></canvas><div class="graph-actions"><button id="graph-prev" aria-label="Previous graph">← Previous</button><span id="graph-caption"></span><button id="graph-next" aria-label="Next graph">Next →</button></div></div></div>
+      <div class="card" id="explain-card"><button class="explain-toggle" id="explain-toggle" aria-expanded="false"><span>Explain this code</span><span id="explain-arrow">＋</span></button><div id="explain-body" class="explain-body" hidden><div class="step-top"><span id="step-count">STEP 1</span><span>Plain, simple language</span></div><div class="step-code" id="step-code"></div><div class="step-text" id="step-text"></div><div class="step-actions"><button id="step-prev" disabled>← Back</button><button id="step-next" class="primary">Next →</button></div></div></div>
+      <div class="card"><div class="lbl"><span>Publish report</span><span id="report-program">PDF</span></div><div class="publish"><p>Use the supplied report template with your name.</p><div class="publish-row"><label for="student-name">Your name<input id="student-name" maxlength="40" autocomplete="name" placeholder="Name on report"></label><button id="publish">Publish PDF</button></div><div class="publish-status" id="publish-status" role="status" aria-live="polite"></div></div></div>
+    </div>
+  </div>
+</main>
+<div class="dock"><div><button class="nav" id="previous" aria-label="Previous program">←</button><button class="run" id="run">▶ Run MATLAB</button><button class="nav" id="next" aria-label="Next program">→</button></div></div>
+<script src="./matlab.js" defer></script>
+</body>
+</html>

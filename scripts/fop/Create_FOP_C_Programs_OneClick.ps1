@@ -4,7 +4,8 @@
 
 $ErrorActionPreference = "Stop"
 
-$folder = Join-Path $PSScriptRoot "FOP_First_10_C_Programs"
+$repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+$folder = Join-Path $repoRoot "FOP_LAB/FOP_First_10_C_Programs"
 New-Item -ItemType Directory -Path $folder -Force | Out-Null
 
 $programs = [ordered]@{
@@ -206,16 +207,105 @@ int main(void) {
     return 0;
 }
 '@
+    "11_fibonacci_series.c" = @'
+#include <stdio.h>
+int main(void) {
+    int count;
+    unsigned long long first = 0, second = 1;
+    if (scanf("%d", &count) != 1 || count < 0 || count > 94) return 1;
+    for (int i = 0; i < count; ++i) {
+        printf("%llu%s", first, i + 1 == count ? "\n" : " ");
+        unsigned long long next = first + second;
+        first = second; second = next;
+    }
+    return 0;
+}
+'@
+    "12_first_ten_natural_numbers.c" = @'
+#include <stdio.h>
+int main(void) {
+    for (int number = 1; number <= 10; ++number)
+        printf("%d%s", number, number == 10 ? "\n" : " ");
+    return 0;
+}
+'@
+    "13_reverse_number.c" = @'
+#include <stdio.h>
+int main(void) {
+    long long number, reversed = 0;
+    if (scanf("%lld", &number) != 1 || number < 0) return 1;
+    do { reversed = reversed * 10 + number % 10; number /= 10; } while (number > 0);
+    printf("Reverse = %lld\n", reversed);
+    return 0;
+}
+'@
+    "14_multiplication_table.c" = @'
+#include <stdio.h>
+int main(void) {
+    int number;
+    if (scanf("%d", &number) != 1) return 1;
+    for (int multiplier = 1; multiplier <= 10; ++multiplier)
+        printf("%d x %d = %d\n", number, multiplier, number * multiplier);
+    return 0;
+}
+'@
+    "15_grades_for_students.c" = @'
+#include <stdio.h>
+static char grade_for(int marks) {
+    if (marks >= 90) return 'A';
+    if (marks >= 75) return 'B';
+    if (marks >= 60) return 'C';
+    if (marks >= 40) return 'D';
+    return 'F';
+}
+int main(void) {
+    int count, marks;
+    if (scanf("%d", &count) != 1 || count < 1) return 1;
+    for (int student = 1; student <= count; ++student) {
+        if (scanf("%d", &marks) != 1 || marks < 0 || marks > 100) return 1;
+        printf("Student %d: Grade %c\n", student, grade_for(marks));
+    }
+    return 0;
+}
+'@
+    "16_power_function.c" = @'
+#include <stdio.h>
+static double power(double base, int exponent) {
+    long long steps = exponent;
+    double result = 1.0;
+    if (steps < 0) { base = 1.0 / base; steps = -steps; }
+    while (steps-- > 0) result *= base;
+    return result;
+}
+int main(void) {
+    double base; int exponent;
+    if (scanf("%lf %d", &base, &exponent) != 2 || (base == 0 && exponent < 0)) return 1;
+    printf("%.6g^%d = %.10g\n", base, exponent, power(base, exponent));
+    return 0;
+}
+'@
+    "17_reverse_one_dimensional_array.c" = @'
+#include <stdio.h>
+int main(void) {
+    int numbers[10];
+    for (int i = 0; i < 10; ++i) if (scanf("%d", &numbers[i]) != 1) return 1;
+    for (int i = 9; i >= 0; --i) printf("%d%s", numbers[i], i == 0 ? "\n" : " ");
+    return 0;
+}
+'@
 }
 
+$created = 0
 foreach ($entry in $programs.GetEnumerator()) {
     $filePath = Join-Path $folder $entry.Key
-    # UTF-8 without BOM for compatibility with common C compilers/editors.
-    [System.IO.File]::WriteAllText($filePath, ($entry.Value.Trim() + "`r`n"), (New-Object System.Text.UTF8Encoding($false)))
+    if (-not (Test-Path -LiteralPath $filePath)) {
+        [System.IO.File]::WriteAllText($filePath, ($entry.Value.Trim() + "`r`n"), (New-Object System.Text.UTF8Encoding($false)))
+        $created++
+    }
 }
 
 $readme = @'
-FOP Lab — First 10 Programs in C
+FOP Lab — First 17 Programs in C
 
 Files are saved as standard C source files (.c).
 
@@ -231,13 +321,10 @@ Notes:
 - Program 9 uses an example grading scale; use your teacher's scale if given.
 - Program 10 lets you choose factorial or positive divisors.
 '@
-[System.IO.File]::WriteAllText((Join-Path $folder "README.txt"), $readme, (New-Object System.Text.UTF8Encoding($false)))
+if (-not (Test-Path -LiteralPath (Join-Path $folder "README.txt"))) {
+    [System.IO.File]::WriteAllText((Join-Path $folder "README.txt"), $readme, (New-Object System.Text.UTF8Encoding($false)))
+}
 
 Write-Host ""
-Write-Host "Success! Created 10 C programs in:" -ForegroundColor Green
+Write-Host "Success! Created $created missing C programs (17 total) in:" -ForegroundColor Green
 Write-Host $folder -ForegroundColor Cyan
-Write-Host ""
-Write-Host "Opening the folder..."
-Start-Process explorer.exe -ArgumentList "`"$folder`""
-Write-Host "Done. You can close this window."
-Read-Host "Press Enter to exit"

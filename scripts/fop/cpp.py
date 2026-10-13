@@ -144,13 +144,104 @@ int main() {
     return 0;
 }
 """,
+    "11_fibonacci_series.cpp": r"""#include <iostream>
+using namespace std;
+int main() {
+    int count;
+    unsigned long long first = 0, second = 1;
+    if (!(cin >> count) || count < 0 || count > 94) return 1;
+    for (int i = 0; i < count; ++i) {
+        cout << first << (i + 1 == count ? '\n' : ' ');
+        unsigned long long next = first + second;
+        first = second;
+        second = next;
+    }
+    return 0;
+}
+""",
+    "12_first_ten_natural_numbers.cpp": r"""#include <iostream>
+using namespace std;
+int main() {
+    for (int number = 1; number <= 10; ++number)
+        cout << number << (number == 10 ? '\n' : ' ');
+    return 0;
+}
+""",
+    "13_reverse_number.cpp": r"""#include <iostream>
+using namespace std;
+int main() {
+    long long number, reversed = 0;
+    if (!(cin >> number) || number < 0) return 1;
+    do { reversed = reversed * 10 + number % 10; number /= 10; } while (number > 0);
+    cout << "Reverse = " << reversed << '\n';
+    return 0;
+}
+""",
+    "14_multiplication_table.cpp": r"""#include <iostream>
+using namespace std;
+int main() {
+    int number;
+    if (!(cin >> number)) return 1;
+    for (int multiplier = 1; multiplier <= 10; ++multiplier)
+        cout << number << " x " << multiplier << " = " << number * multiplier << '\n';
+    return 0;
+}
+""",
+    "15_grades_for_students.cpp": r"""#include <iostream>
+using namespace std;
+char grade_for(int marks) {
+    if (marks >= 90) return 'A';
+    if (marks >= 75) return 'B';
+    if (marks >= 60) return 'C';
+    if (marks >= 40) return 'D';
+    return 'F';
+}
+int main() {
+    int count, marks;
+    if (!(cin >> count) || count < 1) return 1;
+    for (int student = 1; student <= count; ++student) {
+        if (!(cin >> marks) || marks < 0 || marks > 100) return 1;
+        cout << "Student " << student << ": Grade " << grade_for(marks) << '\n';
+    }
+    return 0;
+}
+""",
+    "16_power_function.cpp": r"""#include <iostream>
+using namespace std;
+double power(double base, int exponent) {
+    long long steps = exponent;
+    double result = 1.0;
+    if (steps < 0) { base = 1.0 / base; steps = -steps; }
+    while (steps-- > 0) result *= base;
+    return result;
+}
+int main() {
+    double base; int exponent;
+    if (!(cin >> base >> exponent) || (base == 0 && exponent < 0)) return 1;
+    cout << base << '^' << exponent << " = " << power(base, exponent) << '\n';
+    return 0;
+}
+""",
+    "17_reverse_one_dimensional_array.cpp": r"""#include <iostream>
+using namespace std;
+int main() {
+    int numbers[10];
+    for (int i = 0; i < 10; ++i) if (!(cin >> numbers[i])) return 1;
+    for (int i = 9; i >= 0; --i) cout << numbers[i] << (i == 0 ? '\n' : ' ');
+    return 0;
+}
+""",
 }
 
 def main():
-    output_dir = Path(__file__).resolve().parent / "FOP_First_10_Programs"
+    output_dir = Path(__file__).resolve().parents[2] / "FOP_LAB" / "FOP_First_10_CPP_Programs"
     output_dir.mkdir(parents=True, exist_ok=True)
+    created = 0
     for filename, source in PROGRAMS.items():
-        (output_dir / filename).write_text(source, encoding="utf-8")
+        target = output_dir / filename
+        if not target.exists():
+            target.write_text(source, encoding="utf-8")
+            created += 1
     readme = """FOP Lab — First 10 C++ Programs
 
 Compile a file using g++:
@@ -161,8 +252,10 @@ Program 6 assumes gross salary = basic + HRA + DA.
 Program 9 uses an example grade scale; check your instructor's official scale.
 Program 10 lets you choose factorial or listing positive divisors.
 """
-    (output_dir / "README.txt").write_text(readme, encoding="utf-8")
-    print(f"Created {len(PROGRAMS)} C++ files in: {output_dir}")
+    readme_path = output_dir / "README.txt"
+    if not readme_path.exists():
+        readme_path.write_text(readme, encoding="utf-8")
+    print(f"Created {created} missing C++ files ({len(PROGRAMS)} total) in: {output_dir}")
 
 if __name__ == "__main__":
     main()
