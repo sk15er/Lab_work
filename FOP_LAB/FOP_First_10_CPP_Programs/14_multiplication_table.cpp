@@ -11,6 +11,7 @@ int main() {
     }
 
     for (int multiplier = 1; multiplier <= 10; ++multiplier)
-        cout << number << " x " << multiplier << " = " << number * multiplier << '\n';
+        cout << number << " x " << multiplier << " = "
+             << static_cast<long long>(number) * multiplier << '\n';
     return 0;
 }

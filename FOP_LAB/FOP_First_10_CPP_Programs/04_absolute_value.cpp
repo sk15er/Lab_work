@@ -5,7 +5,10 @@ using namespace std;
 int main() {
     double number;
     cout << "Enter a number: ";
-    cin >> number;
+    if (!(cin >> number)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     cout << "Absolute value = " << fabs(number) << '\n';
     return 0;
 }

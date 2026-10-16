@@ -20,7 +20,10 @@ using namespace std;
 int main() {
     double a, b;
     cout << "Enter two numbers: ";
-    cin >> a >> b;
+    if (!(cin >> a >> b)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     cout << "Sum = " << a + b << '\n';
     return 0;
 }
@@ -31,7 +34,10 @@ using namespace std;
 int main() {
     double principal, rate, time;
     cout << "Enter principal, annual rate (%), and time (years): ";
-    cin >> principal >> rate >> time;
+    if (!(cin >> principal >> rate >> time)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     double interest = principal * rate * time / 100.0;
     cout << "Simple interest = " << interest << '\n';
     cout << "Total amount = " << principal + interest << '\n';
@@ -45,7 +51,10 @@ using namespace std;
 int main() {
     double number;
     cout << "Enter a number: ";
-    cin >> number;
+    if (!(cin >> number)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     cout << "Absolute value = " << fabs(number) << '\n';
     return 0;
 }
@@ -56,7 +65,10 @@ using namespace std;
 int main() {
     double a, b;
     cout << "Enter two numbers: ";
-    cin >> a >> b;
+    if (!(cin >> a >> b)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     double temp = a;
     a = b;
     b = temp;
@@ -70,7 +82,10 @@ using namespace std;
 int main() {
     double basic, hra, da;
     cout << "Enter basic salary, HRA, and DA: ";
-    cin >> basic >> hra >> da;
+    if (!(cin >> basic >> hra >> da)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     cout << "Gross salary = " << basic + hra + da << '\n';
     return 0;
 }
@@ -81,7 +96,10 @@ using namespace std;
 int main() {
     long long number;
     cout << "Enter an integer: ";
-    cin >> number;
+    if (!(cin >> number)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     if (number % 2 == 0) cout << "Even\n";
     else cout << "Odd\n";
     return 0;
@@ -93,7 +111,10 @@ using namespace std;
 int main() {
     double a, b, c;
     cout << "Enter three numbers: ";
-    cin >> a >> b >> c;
+    if (!(cin >> a >> b >> c)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     double greatest = a;
     if (b > greatest) greatest = b;
     if (c > greatest) greatest = c;
@@ -107,7 +128,10 @@ using namespace std;
 int main() {
     double marks;
     cout << "Enter marks out of 100: ";
-    cin >> marks;
+    if (!(cin >> marks)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     if (marks < 0 || marks > 100) cout << "Invalid marks\n";
     else if (marks >= 90) cout << "Grade: A\n";
     else if (marks >= 80) cout << "Grade: B\n";
@@ -123,24 +147,33 @@ int main() {
 using namespace std;
 int main() {
     int choice;
-    cout << "1. Factorial\\n2. Positive divisors\\nChoose: ";
-    cin >> choice;
+    cout << "1. Factorial\n2. Positive divisors\nChoose: ";
+    if (!(cin >> choice)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     if (choice == 1) {
         int n;
         cout << "Enter a non-negative integer (0 to 20): ";
-        cin >> n;
-        if (n < 0 || n > 20) { cout << "Out of range\\n"; return 0; }
+        if (!(cin >> n) || n < 0 || n > 20) {
+            cout << "Enter an integer from 0 to 20.\n";
+            return 1;
+        }
         unsigned long long result = 1;
         for (int i = 2; i <= n; ++i) result *= static_cast<unsigned long long>(i);
         cout << n << "! = " << result << '\n';
     } else if (choice == 2) {
         int n;
         cout << "Enter a positive integer: ";
-        cin >> n;
-        if (n <= 0) { cout << "Enter a positive integer\\n"; return 0; }
-        for (int i = 1; i <= n; ++i) if (n % i == 0) cout << i << ' ';
+        if (!(cin >> n) || n <= 0) {
+            cout << "Enter a positive integer.\n";
+            return 1;
+        }
+        for (long long i = 1; i <= n; ++i) if (n % i == 0) cout << i << ' ';
         cout << '\n';
-    } else cout << "Invalid choice\\n";
+    } else {
+        cout << "Invalid choice.\n";
+    }
     return 0;
 }
 """,
@@ -170,9 +203,10 @@ int main() {
     "13_reverse_number.cpp": r"""#include <iostream>
 using namespace std;
 int main() {
-    long long number, reversed = 0;
+    long long number;
+    unsigned long long reversed = 0;
     if (!(cin >> number) || number < 0) return 1;
-    do { reversed = reversed * 10 + number % 10; number /= 10; } while (number > 0);
+    do { reversed = reversed * 10 + static_cast<unsigned long long>(number % 10); number /= 10; } while (number > 0);
     cout << "Reverse = " << reversed << '\n';
     return 0;
 }
@@ -183,7 +217,8 @@ int main() {
     int number;
     if (!(cin >> number)) return 1;
     for (int multiplier = 1; multiplier <= 10; ++multiplier)
-        cout << number << " x " << multiplier << " = " << number * multiplier << '\n';
+        cout << number << " x " << multiplier << " = "
+             << static_cast<long long>(number) * multiplier << '\n';
     return 0;
 }
 """,

@@ -4,7 +4,10 @@ using namespace std;
 int main() {
     double basic, hra, da;
     cout << "Enter basic salary, HRA, and DA: ";
-    cin >> basic >> hra >> da;
+    if (!(cin >> basic >> hra >> da)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     cout << "Gross salary = " << basic + hra + da << '\n';
     return 0;
 }

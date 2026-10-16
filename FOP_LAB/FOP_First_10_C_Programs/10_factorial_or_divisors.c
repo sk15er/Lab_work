@@ -28,7 +28,8 @@ int main(void) {
 
         printf("%d! = %llu\n", n, factorial);
     } else if (choice == 2) {
-        int n, i;
+        int n;
+        long long i;
         printf("Enter a positive integer: ");
         if (scanf("%d", &n) != 1 || n <= 0) {
             printf("Please enter a positive integer.\n");
@@ -38,7 +39,7 @@ int main(void) {
         printf("Positive divisors of %d: ", n);
         for (i = 1; i <= n; i++) {
             if (n % i == 0)
-                printf("%d ", i);
+                printf("%lld ", i);
         }
         printf("\n");
     } else {

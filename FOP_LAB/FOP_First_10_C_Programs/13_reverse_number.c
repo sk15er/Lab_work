@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 int main(void) {
-    long long number, reversed = 0;
+    long long number;
+    unsigned long long reversed = 0;
     printf("Enter a non-negative integer: ");
     if (scanf("%lld", &number) != 1 || number < 0) {
         printf("Please enter a non-negative integer.\n");
@@ -10,10 +11,10 @@ int main(void) {
     }
 
     do {
-        reversed = reversed * 10 + number % 10;
+        reversed = reversed * 10 + (unsigned long long)(number % 10);
         number /= 10;
     } while (number > 0);
 
-    printf("Reverse = %lld\n", reversed);
+    printf("Reverse = %llu\n", reversed);
     return 0;
 }

@@ -4,7 +4,10 @@ using namespace std;
 int main() {
     double marks;
     cout << "Enter marks out of 100: ";
-    cin >> marks;
+    if (!(cin >> marks)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     if (marks < 0 || marks > 100) cout << "Invalid marks\n";
     else if (marks >= 90) cout << "Grade: A\n";
     else if (marks >= 80) cout << "Grade: B\n";

@@ -4,7 +4,10 @@ using namespace std;
 int main() {
     double a, b, c;
     cout << "Enter three numbers: ";
-    cin >> a >> b >> c;
+    if (!(cin >> a >> b >> c)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     double greatest = a;
     if (b > greatest) greatest = b;
     if (c > greatest) greatest = c;

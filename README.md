@@ -2,7 +2,7 @@
 > Bsc Mathmatics and Computing Course for lab work of codes. By Sk16er or Shushank
 
 # [WEBSITE TO LEARN](https://sk15er.github.io/Lab_work/)
-# Zip files of codes [MATLAB](https://github.com/sk15er/Lab_work/releases/download/files/Matlab_programs.zip) and [FOP](https://github.com/sk15er/Lab_work/releases/download/files/fop_programs.zip)
+# Zip files of codes [MATLAB](https://github.com/sk15er/Lab_work/releases/download/files/Matlab_programs.zip) and [FOP](https://github.com/sk15er/Lab_work/releases/download/files/FOP_First_10_C_Programs.zip)
  
 ## Semister one 
 ![alt text](image.png)

@@ -191,7 +191,8 @@ int main(void) {
             factorial *= (unsigned long long)i;
         printf("%d! = %llu\n", n, factorial);
     } else if (choice == 2) {
-        int n, i;
+        int n;
+        long long i;
         printf("Enter a positive integer: ");
         if (scanf("%d", &n) != 1 || n <= 0) {
             printf("Please enter a positive integer.\n");
@@ -199,7 +200,7 @@ int main(void) {
         }
         printf("Positive divisors of %d: ", n);
         for (i = 1; i <= n; i++)
-            if (n % i == 0) printf("%d ", i);
+            if (n % i == 0) printf("%lld ", i);
         printf("\n");
     } else {
         printf("Invalid choice.\n");
@@ -232,10 +233,11 @@ int main(void) {
     "13_reverse_number.c" = @'
 #include <stdio.h>
 int main(void) {
-    long long number, reversed = 0;
+    long long number;
+    unsigned long long reversed = 0;
     if (scanf("%lld", &number) != 1 || number < 0) return 1;
-    do { reversed = reversed * 10 + number % 10; number /= 10; } while (number > 0);
-    printf("Reverse = %lld\n", reversed);
+    do { reversed = reversed * 10 + (unsigned long long)(number % 10); number /= 10; } while (number > 0);
+    printf("Reverse = %llu\n", reversed);
     return 0;
 }
 '@
@@ -245,7 +247,7 @@ int main(void) {
     int number;
     if (scanf("%d", &number) != 1) return 1;
     for (int multiplier = 1; multiplier <= 10; ++multiplier)
-        printf("%d x %d = %d\n", number, multiplier, number * multiplier);
+        printf("%d x %d = %lld\n", number, multiplier, (long long)number * multiplier);
     return 0;
 }
 '@

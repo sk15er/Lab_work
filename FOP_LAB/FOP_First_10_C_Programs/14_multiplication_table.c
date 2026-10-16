@@ -10,6 +10,6 @@ int main(void) {
     }
 
     for (int multiplier = 1; multiplier <= 10; ++multiplier)
-        printf("%d x %d = %d\n", number, multiplier, number * multiplier);
+        printf("%d x %d = %lld\n", number, multiplier, (long long)number * multiplier);
     return 0;
 }

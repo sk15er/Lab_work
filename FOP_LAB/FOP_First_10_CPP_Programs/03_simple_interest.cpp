@@ -4,7 +4,10 @@ using namespace std;
 int main() {
     double principal, rate, time;
     cout << "Enter principal, annual rate (%), and time (years): ";
-    cin >> principal >> rate >> time;
+    if (!(cin >> principal >> rate >> time)) {
+        cout << "Invalid input.\n";
+        return 1;
+    }
     double interest = principal * rate * time / 100.0;
     cout << "Simple interest = " << interest << '\n';
     cout << "Total amount = " << principal + interest << '\n';
